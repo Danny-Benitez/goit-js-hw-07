@@ -23,6 +23,7 @@ gallery.innerHTML = galleryMarkup;
 gallery.addEventListener("click", imageGalleryAction);
 
 function imageGalleryAction(event) {
+  event.preventDefault();
   if (event.target.classList.contains("gallery__image")) {
     const newImageURL = event.target.dataset.source;
     openModal(newImageURL);
@@ -45,6 +46,11 @@ function openModal(newImageURL) {
 
     onClose: () => {
       document.removeEventListener("keydown", handleClick);
+      function handleClick(event) {
+        if (event.key === "Escape") {
+          instance.close();
+        }
+      }
     },
   });
 
